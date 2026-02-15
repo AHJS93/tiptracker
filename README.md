@@ -1,4 +1,6 @@
 Tipper
-A simple app for delivery drivers, waitresses etc to keep track of average hourly rates from tips.<img width="1080" height="2186" alt="Tipper1" src="https://github.com/user-attachments/assets/67690e18-fac5-4f67-a2df-5db72bc2204a" />
-<img width="1080" height="2186" alt="Tipper2" src="https://github.com/user-attachments/assets/68420eff-5bfd-436e-b91a-96f5cbb57620" />
-<img width="1080" height="2186" alt="Tipper3" src="https://github.com/user-attachments/assets/ffead6d4-dc15-40c1-bf27-2c4113fb234d" />
+A simple app for delivery drivers, waitresses etc to keep track of average hourly rates from tips.
+
+<img width="540" height="1093" alt="Tipper1" src="https://github.com/user-attachments/assets/6f7cc0ec-d6b8-4b1c-a8cc-3ee5f3595e5f" />
+<img width="540" height="1093" alt="Tipper2" src="https://github.com/user-attachments/assets/492dcd21-313c-4baf-873b-da47c8a63841" />
+<img width="540" height="1093" alt="Tipper3" src="https://github.com/user-attachments/assets/0e8fa274-d91b-4b7e-bf13-aee3a8742ef0" />
