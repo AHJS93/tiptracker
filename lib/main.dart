@@ -1,0 +1,118 @@
+import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
+import 'pages/today_page.dart';
+import 'pages/history_page.dart';
+import 'pages/stats_page.dart';
+import 'models/entry.dart';
+import 'providers/entry_provider.dart';
+import 'providers/theme_provider.dart';
+import 'pages/settings_page.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  await Hive.initFlutter();
+  Hive.registerAdapter(EntryAdapter());
+  await Hive.openBox<Entry>('entries');
+  await Hive.openBox('app_settings');
+
+  final entryProvider = EntryProvider();
+  await entryProvider.init();
+
+  final themeProvider = ThemeProvider();
+  await themeProvider.init();
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => entryProvider),
+        ChangeNotifierProvider(create: (_) => themeProvider),
+      ],
+      child: const MyApp(),
+    ),
+  );
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int _index = 0;
+
+  final pages = const [TodayPage(), HistoryPage(), StatsPage()];
+
+  @override
+  Widget build(BuildContext context) {
+    final themeProvider = context.watch<ThemeProvider>();
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      themeMode: themeProvider.themeMode,
+      theme: ThemeData(
+        useMaterial3: true,
+        colorSchemeSeed: const Color.fromARGB(255, 0, 150, 52),
+        brightness: Brightness.light,
+      ),
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        colorSchemeSeed: const Color.fromARGB(255, 0, 255, 26),
+        brightness: Brightness.dark,
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Row(
+            children: [
+              // Left side: Logo + Title
+              SvgPicture.asset("assets/tipperIcon2.svg", height: 28),
+              const SizedBox(width: 12),
+              const Text(
+                "Tipper",
+                style: TextStyle(
+                  color: Colors.green,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                ),
+              ),
+
+              // Push settings icon to the right
+              const Spacer(),
+
+              // Settings button
+              Builder(
+                builder: (context) {
+                  return IconButton(
+                    icon: const Icon(Icons.settings, color: Colors.green),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const SettingsPage()),
+                      );
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+
+        body: pages[_index],
+        bottomNavigationBar: NavigationBar(
+          selectedIndex: _index,
+          onDestinationSelected: (i) => setState(() => _index = i),
+          destinations: const [
+            NavigationDestination(icon: Icon(Icons.today), label: "Today"),
+            NavigationDestination(icon: Icon(Icons.list), label: "History"),
+            NavigationDestination(icon: Icon(Icons.bar_chart), label: "Stats"),
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1023.9999"
+   height="1023.9999"
+   viewBox="0 0 270.93331 270.93331"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="layer2"
+     style="display:inline;fill:#44aa00;stroke-width:7.95867;stroke-dasharray:none">
+    <circle
+       style="fill:#47b200;fill-opacity:1;stroke:#ffdd00;stroke-width:7.95867;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       id="path1"
+       cx="135.46666"
+       cy="135.46664"
+       r="120.53397" />
+  </g>
+  <g
+     id="layer6" />
+  <g
+     id="layer3"
+     transform="matrix(0.94260063,0,0,0.94260063,8.521742,8.521742)"
+     style="display:inline">
+    <circle
+       style="fill:#68ce23;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       id="path2"
+       cx="134.67519"
+       cy="134.67517"
+       r="104.97728" />
+  </g>
+  <g
+     id="layer4"
+     style="display:inline">
+    <text
+       xml:space="preserve"
+       style="font-size:199.207px;line-height:0.2;font-family:Lexend;-inkscape-font-specification:Lexend;letter-spacing:-6.14222px;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       x="78.095047"
+       y="205.1891"
+       id="text3"><tspan
+         id="tspan3"
+         style="fill:#ffffff;fill-opacity:1;stroke-width:0"
+         x="78.095047"
+         y="205.1891">T</tspan></text>
+  </g>
+</svg>
