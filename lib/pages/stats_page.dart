@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/entry_provider.dart';
 import 'package:intl/intl.dart';
+import 'weekly_breakdown_page.dart';
+import 'monthly_breakdown_page.dart';
 
 class StatsPage extends StatelessWidget {
   const StatsPage({super.key});
@@ -19,16 +21,25 @@ class StatsPage extends StatelessWidget {
     // Weekly total (last 7 days)
     final now = DateTime.now();
     final weekAgo = now.subtract(const Duration(days: 7));
-    final weeklyEntries = entries.where((e) => e.date.isAfter(weekAgo)).toList();
+    final weeklyEntries = entries
+        .where((e) => e.date.isAfter(weekAgo))
+        .toList();
     final weeklyCash = weeklyEntries.fold<double>(0, (sum, e) => sum + e.cash);
-    final weeklyAvg = weeklyEntries.isEmpty ? 0 : weeklyCash / weeklyEntries.length;
+    final weeklyAvg = weeklyEntries.isEmpty
+        ? 0
+        : weeklyCash / weeklyEntries.length;
 
     // Monthly total (current month)
     final monthlyEntries = entries
         .where((e) => e.date.year == now.year && e.date.month == now.month)
         .toList();
-    final monthlyCash = monthlyEntries.fold<double>(0, (sum, e) => sum + e.cash);
-    final monthlyAvg = monthlyEntries.isEmpty ? 0 : monthlyCash / monthlyEntries.length;
+    final monthlyCash = monthlyEntries.fold<double>(
+      0,
+      (sum, e) => sum + e.cash,
+    );
+    final monthlyAvg = monthlyEntries.isEmpty
+        ? 0
+        : monthlyCash / monthlyEntries.length;
 
     // Best day (highest cash)
     final bestEntry = entries.isEmpty
@@ -45,9 +56,9 @@ class StatsPage extends StatelessWidget {
         children: [
           Text(
             "Stats Overview",
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
           ),
 
           const SizedBox(height: 20),
@@ -61,24 +72,53 @@ class StatsPage extends StatelessWidget {
             mainAxisSpacing: 16,
             childAspectRatio: 1.1,
             children: [
-              _StatCard(label: "Total Cash", value: "\$${totalCash.toStringAsFixed(2)}"),
-              _StatCard(label: "Total Hours", value: totalHours.toStringAsFixed(1)),
-              _StatCard(label: "Overall Avg", value: "\$${overallAverage.toStringAsFixed(2)}/hr"),
+              _StatCard(
+                label: "Total Cash",
+                value: "\$${totalCash.toStringAsFixed(2)}",
+              ),
+              _StatCard(
+                label: "Total Hours",
+                value: totalHours.toStringAsFixed(1),
+              ),
+              _StatCard(
+                label: "Overall Avg",
+                value: "\$${overallAverage.toStringAsFixed(2)}/hr",
+              ),
 
               // 🔥 Last 7 Days (Total + Avg)
-              _StatCard(
-                label: "Last 7 Days",
-                value:
-                    "Total: \$${weeklyCash.toStringAsFixed(2)}\nAvg: \$${weeklyAvg.toStringAsFixed(2)}",
-                isLarge: false,
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const WeeklyBreakdownPage(),
+                    ),
+                  );
+                },
+                child: _StatCard(
+                  label: "Last 7 Days",
+                  value:
+                      "Total: \$${weeklyCash.toStringAsFixed(2)}\nAvg: \$${weeklyAvg.toStringAsFixed(2)}",
+                  isLarge: false,
+                ),
               ),
 
               // 🔥 This Month (Total + Avg)
-              _StatCard(
-                label: "This Month",
-                value:
-                    "Total: \$${monthlyCash.toStringAsFixed(2)}\nAvg: \$${monthlyAvg.toStringAsFixed(2)}",
-                isLarge: false,
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const MonthlyBreakdownPage(),
+                    ),
+                  );
+                },
+                child: _StatCard(
+                  label: "This Month",
+                  value:
+                      "Total: \$${monthlyCash.toStringAsFixed(2)}\nAvg: \$${monthlyAvg.toStringAsFixed(2)}",
+                  isLarge: false,
+                ),
               ),
 
               _StatCard(label: "Best Day", value: bestDayLabel, isLarge: false),
@@ -132,24 +172,27 @@ class _StatCard extends StatelessWidget {
               label,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  ),
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
             ),
             const SizedBox(height: 10),
             Text(
               value,
               textAlign: TextAlign.center,
-              style: (isLarge
-                      ? Theme.of(context).textTheme.displaySmall?.copyWith(
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold,
-                          )
-                      : Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ))
-                  ?.copyWith(color: _getValueColor()), // 🔥 Apply color here
+              style:
+                  (isLarge
+                          ? Theme.of(context).textTheme.displaySmall?.copyWith(
+                              fontSize: 26,
+                              fontWeight: FontWeight.bold,
+                            )
+                          : Theme.of(context).textTheme.titleLarge?.copyWith(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ))
+                      ?.copyWith(
+                        color: _getValueColor(),
+                      ), // 🔥 Apply color here
             ),
           ],
         ),

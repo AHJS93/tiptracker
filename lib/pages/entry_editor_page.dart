@@ -11,7 +11,7 @@ class EntryEditorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = context.watch<EntryProvider>();
     final entries = provider.entries.toList()
-  ..sort((a, b) => b.date.compareTo(a.date)); // newest → oldest
+      ..sort((a, b) => b.date.compareTo(a.date)); // newest → oldest
 
 
     return Scaffold(

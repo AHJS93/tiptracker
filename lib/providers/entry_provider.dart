@@ -55,10 +55,12 @@ class EntryProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void deleteEntry(Entry entry) {
-    entry.delete();
+  Future<void> deleteEntry(Entry entry) async {
+    await entry.delete();
+    await renumberIds(); // reorder + fix IDs
     notifyListeners();
   }
+
 
   Future<void> resetAll() async {
     await _box.clear();
