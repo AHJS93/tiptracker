@@ -70,16 +70,8 @@ class _MyAppState extends State<MyApp> {
           title: Row(
             children: [
               // Left side: Logo + Title
-              SvgPicture.asset("assets/tipperIcon2.svg", height: 28),
-              const SizedBox(width: 12),
-              const Text(
-                "Tipper",
-                style: TextStyle(
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22,
-                ),
-              ),
+              
+              SvgPicture.asset("assets/tipperLogo.svg", height: 24),
 
               // Push settings icon to the right
               const Spacer(),
@@ -88,7 +80,7 @@ class _MyAppState extends State<MyApp> {
               Builder(
                 builder: (context) {
                   return IconButton(
-                    icon: const Icon(Icons.settings, color: Colors.green),
+                    icon: const Icon(Icons.settings, color: Color.fromARGB(255, 85, 212, 0)),
                     onPressed: () {
                       Navigator.push(
                         context,

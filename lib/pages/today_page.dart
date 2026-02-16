@@ -113,6 +113,7 @@ class _TodayPageState extends State<TodayPage> {
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontSize: 26,
                         fontWeight: FontWeight.w600,
+                        fontFamily: 'Lexend',
                       ),
                 ),
                 const SizedBox(height: 10),
@@ -121,7 +122,7 @@ class _TodayPageState extends State<TodayPage> {
                   style: Theme.of(context).textTheme.displaySmall?.copyWith(
                         fontSize: 42,
                         fontWeight: FontWeight.bold,
-                        color: Colors.green,
+                        color: Color.fromARGB(255, 85, 212, 0),
                       ),
                 ),
               ],

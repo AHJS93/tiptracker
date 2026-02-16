@@ -45,7 +45,7 @@ class EntryEditorPage extends StatelessWidget {
                     const TextSpan(text: "Cash: "),
                     TextSpan(
                       text: "\$${e.cash}",
-                      style: const TextStyle(color: Colors.green),
+                      style: const TextStyle(color: Color.fromARGB(255, 85, 212, 0)),
                     ),
                     const TextSpan(text: " | Hours: "),
                     TextSpan(
@@ -60,7 +60,7 @@ class EntryEditorPage extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.green,
+                  color: Color.fromARGB(255, 85, 212, 0),
                 ),
               ),
               onTap: () => _openEditor(context, e),

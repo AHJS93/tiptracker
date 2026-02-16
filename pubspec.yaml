@@ -29,6 +29,7 @@ flutter:
   assets:
     - assets/tipperIcon2.svg
     - assets/tipperIcon2.png
+    - assets/tipperLogo.svg
 
 # ⬇️ MOVE BOTH CONFIG BLOCKS HERE — AFTER ALL OTHER TOP‑LEVEL SECTIONS
 
