@@ -45,10 +45,29 @@ class HistoryPage extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              subtitle: Text(
-                "$formattedDate\nCash: \$${e.cash} | Hours: ${e.hours}",
-                style: const TextStyle(fontSize: 16, height: 1.4),
+              subtitle: RichText(
+                text: TextSpan(
+                  style: TextStyle(
+                    fontSize: 16,
+                    height: 1.4,
+                    color: Theme.of(context).textTheme.bodyMedium!.color,
+                  ),
+                  children: [
+                    TextSpan(text: "$formattedDate\n"),
+                    const TextSpan(text: "Cash: "),
+                    TextSpan(
+                      text: "\$${e.cash}",
+                      style: const TextStyle(color: Colors.green),
+                    ),
+                    const TextSpan(text: " | Hours: "),
+                    TextSpan(
+                      text: "${e.hours}",
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ],
+                ),
               ),
+
               trailing: Text(
                 "\$${e.average.toStringAsFixed(2)}/hr",
                 style: const TextStyle(

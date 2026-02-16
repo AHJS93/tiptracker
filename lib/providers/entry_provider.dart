@@ -65,6 +65,19 @@ class EntryProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateEntryDate(Entry entry, DateTime newDate) {
+    entry.date = newDate;
+    entry.save();
+    notifyListeners();
+  }
+
+  void updateEntryId(Entry entry, int newId) {
+    entry.id = newId;
+    entry.save();
+    notifyListeners();
+  }
+
+
   // -----------------------------
   // Stats Helpers
   // -----------------------------

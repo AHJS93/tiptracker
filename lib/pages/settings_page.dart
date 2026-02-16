@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
 import '../providers/entry_provider.dart';
+import 'entry_editor_page.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -86,6 +87,15 @@ class SettingsPage extends StatelessWidget {
                 );
               }
             },
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const EntryEditorPage()),
+              );
+            },
+            child: const Text("Edit Entries"),
           ),
         ],
       ),
