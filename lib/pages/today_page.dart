@@ -43,13 +43,7 @@ class _TodayPageState extends State<TodayPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            "Enter today's earnings",
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
-          const SizedBox(height: 20),
-
-          Text(
-            "and hours worked",
+            "Enter tips & hours",
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(height: 20),
