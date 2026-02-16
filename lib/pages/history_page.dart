@@ -12,7 +12,9 @@ class HistoryPage extends StatelessWidget {
     final provider = context.watch<EntryProvider>();
 
     // Newest entries first
-    final entries = provider.entries.reversed.toList();
+    final entries = provider.entries.toList()
+  ..sort((a, b) => b.date.compareTo(a.date));
+
 
     return ListView.builder(
       padding: const EdgeInsets.all(12),

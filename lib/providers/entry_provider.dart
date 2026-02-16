@@ -71,11 +71,34 @@ class EntryProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateEntryId(Entry entry, int newId) {
-    entry.id = newId;
+  void updateEntryCash(Entry entry, double newCash) {
+    entry.cash = newCash;
     entry.save();
     notifyListeners();
   }
+
+  void updateEntryHours(Entry entry, double newHours) {
+    entry.hours = newHours;
+    entry.save();
+    notifyListeners();
+  }
+
+  Future<void> renumberIds() async {
+    final list = _box.values.toList();
+
+    // Sort by date (newest → oldest)
+    list.sort((a, b) => b.date.compareTo(a.date));
+
+    // Highest ID goes to the first (newest) entry
+    for (int i = 0; i < list.length; i++) {
+      list[i].id = list.length - i;
+      await list[i].save();
+    }
+
+    notifyListeners();
+  }
+
+
 
 
   // -----------------------------

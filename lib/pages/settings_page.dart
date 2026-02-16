@@ -56,6 +56,18 @@ class SettingsPage extends StatelessWidget {
           ),
 
           ListTile(
+            leading: const Icon(Icons.edit, color: Colors.blue),
+            title: const Text("Edit Entries"),
+            subtitle: const Text("Modify timestamps and IDs"),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const EntryEditorPage()),
+              );
+            },
+          ),
+
+          ListTile(
             leading: const Icon(Icons.delete_forever, color: Colors.red),
             title: const Text("Reset All Data"),
             subtitle: const Text("This will permanently delete all entries."),
@@ -87,15 +99,6 @@ class SettingsPage extends StatelessWidget {
                 );
               }
             },
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const EntryEditorPage()),
-              );
-            },
-            child: const Text("Edit Entries"),
           ),
         ],
       ),
