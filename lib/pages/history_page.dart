@@ -59,7 +59,7 @@ class HistoryPage extends StatelessWidget {
                     const TextSpan(text: "Cash: "),
                     TextSpan(
                       text: "\$${e.cash}",
-                      style: const TextStyle(color: Color.fromARGB(255, 85, 212, 0)),
+                      style: const TextStyle(color: Color.fromARGB(255, 35, 176, 28)),
                     ),
                     const TextSpan(text: " | Hours: "),
                     TextSpan(
@@ -75,7 +75,7 @@ class HistoryPage extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 85, 212, 0),
+                  color: Color.fromARGB(255, 35, 176, 28),
                 ),
               ),
             ),

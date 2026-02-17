@@ -151,7 +151,7 @@ class _StatCard extends StatelessWidget {
         label.contains("Best Day") ||
         label.contains("Last 7 Days") ||
         label.contains("This Month")) {
-      return Color.fromARGB(255, 85, 212, 0);
+      return Color.fromARGB(255, 35, 176, 28);
     }
 
     if (label.contains("Hours")) {

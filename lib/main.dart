@@ -12,7 +12,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   await Hive.initFlutter();
   Hive.registerAdapter(EntryAdapter());
   await Hive.openBox<Entry>('entries');
@@ -61,16 +61,34 @@ class _MyAppState extends State<MyApp> {
       ),
       darkTheme: ThemeData(
         useMaterial3: true,
-        colorSchemeSeed: const Color.fromARGB(255, 0, 255, 26),
-        brightness: Brightness.dark,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromARGB(255, 0, 255, 26),
+          brightness: Brightness.dark,
+        ),
+        navigationBarTheme: NavigationBarThemeData(
+          backgroundColor: const Color(0xFF111111),
+          indicatorColor: Color.fromARGB(255, 35, 176, 28),
+          iconTheme: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.selected)) {
+              return const IconThemeData(color: Color.fromARGB(255, 0, 0, 0));
+            }
+            return const IconThemeData(color: Colors.grey);
+          }),
+          labelTextStyle: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.selected)) {
+              return const TextStyle(color: Color.fromARGB(255, 35, 176, 28));
+            }
+            return const TextStyle(color: Colors.grey);
+          }),
+        ),
       ),
+
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
           title: Row(
             children: [
               // Left side: Logo + Title
-              
               SvgPicture.asset("assets/tipperLogo.svg", height: 24),
 
               // Push settings icon to the right
@@ -80,7 +98,10 @@ class _MyAppState extends State<MyApp> {
               Builder(
                 builder: (context) {
                   return IconButton(
-                    icon: const Icon(Icons.settings, color: Color.fromARGB(255, 85, 212, 0)),
+                    icon: const Icon(
+                      Icons.settings,
+                      color: Color.fromARGB(255, 35, 176, 28),
+                    ),
                     onPressed: () {
                       Navigator.push(
                         context,

@@ -116,7 +116,7 @@ class _TodayPageState extends State<TodayPage> {
                   style: Theme.of(context).textTheme.displaySmall?.copyWith(
                         fontSize: 42,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 85, 212, 0),
+                        color: Color.fromARGB(255, 35, 176, 28),
                       ),
                 ),
               ],
