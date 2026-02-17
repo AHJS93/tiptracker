@@ -21,30 +21,23 @@ class StatsPage extends StatelessWidget {
     // Weekly total (last 7 days)
     final now = DateTime.now();
     final weekAgo = now.subtract(const Duration(days: 7));
-    final weeklyEntries = entries
-        .where((e) => e.date.isAfter(weekAgo))
-        .toList();
+    final weeklyEntries = entries.where((e) => e.date.isAfter(weekAgo)).toList();
     final weeklyCash = weeklyEntries.fold<double>(0, (sum, e) => sum + e.cash);
-    final weeklyAvg = weeklyEntries.isEmpty
-        ? 0
-        : weeklyCash / weeklyEntries.length;
+    final weeklyAvg =
+        weeklyEntries.isEmpty ? 0 : weeklyCash / weeklyEntries.length;
 
     // Monthly total (current month)
     final monthlyEntries = entries
         .where((e) => e.date.year == now.year && e.date.month == now.month)
         .toList();
-    final monthlyCash = monthlyEntries.fold<double>(
-      0,
-      (sum, e) => sum + e.cash,
-    );
-    final monthlyAvg = monthlyEntries.isEmpty
-        ? 0
-        : monthlyCash / monthlyEntries.length;
+    final monthlyCash =
+        monthlyEntries.fold<double>(0, (sum, e) => sum + e.cash);
+    final monthlyAvg =
+        monthlyEntries.isEmpty ? 0 : monthlyCash / monthlyEntries.length;
 
     // Best day (highest cash)
-    final bestEntry = entries.isEmpty
-        ? null
-        : entries.reduce((a, b) => a.cash > b.cash ? a : b);
+    final bestEntry =
+        entries.isEmpty ? null : entries.reduce((a, b) => a.cash > b.cash ? a : b);
 
     final bestDayLabel = bestEntry == null
         ? "No entries yet"
@@ -56,9 +49,10 @@ class StatsPage extends StatelessWidget {
         children: [
           Text(
             "Stats Overview",
-            style: Theme.of(
-              context,
-            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+            style: Theme.of(context)
+                .textTheme
+                .headlineSmall
+                ?.copyWith(fontWeight: FontWeight.bold),
           ),
 
           const SizedBox(height: 20),
@@ -77,20 +71,18 @@ class StatsPage extends StatelessWidget {
                 value: "\$${totalCash.toStringAsFixed(2)}",
               ),
               _StatCard(
-                label: "Total Hours",
-                value: totalHours.toStringAsFixed(1),
-              ),
-              _StatCard(
                 label: "Overall Avg",
                 value: "\$${overallAverage.toStringAsFixed(2)}/hr",
               ),
+              
 
-              // 🔥 Last 7 Days (Total + Avg)
+              // 🔥 Last 7 Days (with green border)
               _StatCard(
                 label: "Last 7 Days",
                 value:
                     "Total: \$${weeklyCash.toStringAsFixed(2)}\nAvg: \$${weeklyAvg.toStringAsFixed(2)}",
                 isLarge: false,
+                highlight: true, // 👈 GREEN BORDER
                 onTap: () {
                   Navigator.push(
                     context,
@@ -101,12 +93,13 @@ class StatsPage extends StatelessWidget {
                 },
               ),
 
-              // 🔥 This Month (Total + Avg)
+              // 🔥 This Month (with green border)
               _StatCard(
                 label: "This Month",
                 value:
                     "Total: \$${monthlyCash.toStringAsFixed(2)}\nAvg: \$${monthlyAvg.toStringAsFixed(2)}",
                 isLarge: false,
+                highlight: true, // 👈 GREEN BORDER
                 onTap: () {
                   Navigator.push(
                     context,
@@ -116,8 +109,16 @@ class StatsPage extends StatelessWidget {
                   );
                 },
               ),
+              _StatCard(
+                label: "Total Hours",
+                value: totalHours.toStringAsFixed(1),
+              ),
 
-              _StatCard(label: "Best Day", value: bestDayLabel, isLarge: false),
+              _StatCard(
+                label: "Best Day",
+                value: bestDayLabel,
+                isLarge: false,
+              ),
             ],
           ),
 
@@ -132,13 +133,15 @@ class _StatCard extends StatelessWidget {
   final String label;
   final String value;
   final bool isLarge;
-  final VoidCallback? onTap; // 👈 NEW
+  final bool highlight; // 👈 NEW
+  final VoidCallback? onTap;
 
   const _StatCard({
     required this.label,
     required this.value,
     this.isLarge = true,
-    this.onTap, // 👈 NEW
+    this.onTap,
+    this.highlight = false, // 👈 NEW
   });
 
   Color _getValueColor() {
@@ -147,7 +150,7 @@ class _StatCard extends StatelessWidget {
         label.contains("Best Day") ||
         label.contains("Last 7 Days") ||
         label.contains("This Month")) {
-      return Color.fromARGB(255, 35, 176, 28);
+      return const Color.fromARGB(255, 35, 176, 28);
     }
 
     if (label.contains("Hours")) {
@@ -160,11 +163,19 @@ class _StatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      // 👈 Card is now tappable
       onTap: onTap,
       borderRadius: BorderRadius.circular(8),
       child: Card(
         elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+          side: highlight
+              ? const BorderSide(
+                  color: Color.fromARGB(255, 35, 176, 28),
+                  width: 2,
+                )
+              : BorderSide.none,
+        ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
           child: Column(
@@ -174,9 +185,9 @@ class _StatCard extends StatelessWidget {
                 label,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
 
               const SizedBox(height: 10),
@@ -184,19 +195,16 @@ class _StatCard extends StatelessWidget {
               Text(
                 value,
                 textAlign: TextAlign.center,
-                style:
-                    (isLarge
-                            ? Theme.of(
-                                context,
-                              ).textTheme.displaySmall?.copyWith(
-                                fontSize: 26,
-                                fontWeight: FontWeight.bold,
-                              )
-                            : Theme.of(context).textTheme.titleLarge?.copyWith(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                              ))
-                        ?.copyWith(color: _getValueColor()),
+                style: (isLarge
+                        ? Theme.of(context).textTheme.displaySmall?.copyWith(
+                              fontSize: 26,
+                              fontWeight: FontWeight.bold,
+                            )
+                        : Theme.of(context).textTheme.titleLarge?.copyWith(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ))
+                    ?.copyWith(color: _getValueColor()),
               ),
             ],
           ),
