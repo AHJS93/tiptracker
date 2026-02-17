@@ -178,7 +178,7 @@ class _StatCardState extends State<_StatCard>
     // Border animation
     _borderController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 800),
     );
 
     // Pulse animation
