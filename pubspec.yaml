@@ -34,12 +34,12 @@ flutter:
 # ⬇️ MOVE BOTH CONFIG BLOCKS HERE — AFTER ALL OTHER TOP‑LEVEL SECTIONS
 
 flutter_native_splash:
-  color: "#47B200"
+  color: "#23B01C"
   image: assets/tipperIcon2-2.png
 
   android_12:
     image: assets/tipperIcon2-2.png
-    icon_background_color: "#47B200"
+    icon_background_color: "#23B01C"
     branding: null
 
 flutter_launcher_icons:
@@ -47,5 +47,5 @@ flutter_launcher_icons:
   ios: true
 
   image_path: "assets/tipperIcon2_foreground.png"
-  adaptive_icon_background: "#47B200"
+  adaptive_icon_background: "#23B01C"
   adaptive_icon_foreground: "assets/tipperIcon2_foreground.png"
