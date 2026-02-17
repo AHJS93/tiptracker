@@ -54,23 +54,29 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: themeProvider.themeMode,
+
+      // 🌞 LIGHT THEME
       theme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: const Color.fromARGB(255, 0, 150, 52),
         brightness: Brightness.light,
+        scaffoldBackgroundColor: Colors.white, // 👈 REQUIRED
       ),
+
+      // 🌙 DARK THEME
       darkTheme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color.fromARGB(255, 0, 255, 26),
           brightness: Brightness.dark,
         ),
+
         navigationBarTheme: NavigationBarThemeData(
           backgroundColor: const Color.fromARGB(255, 20, 20, 20),
-          indicatorColor: Color.fromARGB(255, 35, 176, 28),
+          indicatorColor: const Color.fromARGB(255, 35, 176, 28),
           iconTheme: WidgetStateProperty.resolveWith((states) {
             if (states.contains(WidgetState.selected)) {
-              return const IconThemeData(color: Color.fromARGB(255, 0, 0, 0));
+              return const IconThemeData(color: Colors.black);
             }
             return const IconThemeData(color: Colors.grey);
           }),
@@ -81,10 +87,12 @@ class _MyAppState extends State<MyApp> {
             return const TextStyle(color: Colors.grey);
           }),
         ),
-        appBarTheme: AppBarThemeData(
-          backgroundColor: Color.fromARGB(255, 20, 20, 20)
+
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromARGB(255, 20, 20, 20),
         ),
-        scaffoldBackgroundColor: Color.fromARGB(255, 15, 15, 15)
+
+        scaffoldBackgroundColor: const Color(0xFF0F0F0F), // 👈 DARK BACKGROUND
       ),
 
       home: Scaffold(
@@ -92,13 +100,8 @@ class _MyAppState extends State<MyApp> {
           centerTitle: true,
           title: Row(
             children: [
-              // Left side: Logo + Title
               SvgPicture.asset("assets/tipperLogo.svg", height: 24),
-
-              // Push settings icon to the right
               const Spacer(),
-
-              // Settings button
               Builder(
                 builder: (context) {
                   return IconButton(
@@ -120,6 +123,7 @@ class _MyAppState extends State<MyApp> {
         ),
 
         body: pages[_index],
+
         bottomNavigationBar: NavigationBar(
           selectedIndex: _index,
           onDestinationSelected: (i) => setState(() => _index = i),
@@ -133,3 +137,4 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+

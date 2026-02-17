@@ -43,100 +43,90 @@ class StatsPage extends StatelessWidget {
         ? "No entries yet"
         : "${DateFormat('EEE, MMM d').format(bestEntry.date)}\n\$${bestEntry.cash.toStringAsFixed(2)}";
 
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color(0xFF000000),
-            Color(0xFF000000),
-          ],
-        ),
-      ),
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            Text(
-              "Stats Overview",
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineSmall
-                  ?.copyWith(fontWeight: FontWeight.bold, color: Colors.white),
-            ),
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        children: [
+          Text(
+            "Stats Overview",
+            style: Theme.of(context)
+                .textTheme
+                .headlineSmall
+                ?.copyWith(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSurface,
+),
+          ),
 
-            const SizedBox(height: 20),
+          const SizedBox(height: 20),
 
-            GridView.count(
-              crossAxisCount: 2,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-              childAspectRatio: 1.1,
-              children: [
-                _StatCard(
-                  label: "Total Cash",
-                  value: "\$${totalCash.toStringAsFixed(2)}",
-                ),
-                _StatCard(
-                  label: "Overall Avg",
-                  value: "\$${overallAverage.toStringAsFixed(2)}/hr",
-                ),
+          GridView.count(
+            crossAxisCount: 2,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+            childAspectRatio: 1.1,
+            children: [
+              _StatCard(
+                label: "Total Cash",
+                value: "\$${totalCash.toStringAsFixed(2)}",
+              ),
+              _StatCard(
+                label: "Overall Avg",
+                value: "\$${overallAverage.toStringAsFixed(2)}/hr",
+              ),
 
-                _StatCard(
-                  label: "Last 7 Days",
-                  value:
-                      "Total: \$${weeklyCash.toStringAsFixed(2)}\nAvg: \$${weeklyAvg.toStringAsFixed(2)}",
-                  isLarge: false,
-                  highlight: true,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const WeeklyBreakdownPage(),
-                      ),
-                    );
-                  },
-                ),
+              _StatCard(
+                label: "Last 7 Days",
+                value:
+                    "Total: \$${weeklyCash.toStringAsFixed(2)}\nAvg: \$${weeklyAvg.toStringAsFixed(2)}",
+                isLarge: false,
+                highlight: true,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const WeeklyBreakdownPage(),
+                    ),
+                  );
+                },
+              ),
 
-                _StatCard(
-                  label: "This Month",
-                  value:
-                      "Total: \$${monthlyCash.toStringAsFixed(2)}\nAvg: \$${monthlyAvg.toStringAsFixed(2)}",
-                  isLarge: false,
-                  highlight: true,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const MonthlyBreakdownPage(),
-                      ),
-                    );
-                  },
-                ),
+              _StatCard(
+                label: "This Month",
+                value:
+                    "Total: \$${monthlyCash.toStringAsFixed(2)}\nAvg: \$${monthlyAvg.toStringAsFixed(2)}",
+                isLarge: false,
+                highlight: true,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const MonthlyBreakdownPage(),
+                    ),
+                  );
+                },
+              ),
 
-                _StatCard(
-                  label: "Total Hours",
-                  value: totalHours.toStringAsFixed(1),
-                ),
+              _StatCard(
+                label: "Total Hours",
+                value: totalHours.toStringAsFixed(1),
+              ),
 
-                _StatCard(
-                  label: "Best Day",
-                  value: bestDayLabel,
-                  isLarge: false,
-                ),
-              ],
-            ),
+              _StatCard(
+                label: "Best Day",
+                value: bestDayLabel,
+                isLarge: false,
+              ),
+            ],
+          ),
 
-            const SizedBox(height: 40),
-          ],
-        ),
+          const SizedBox(height: 40),
+        ],
       ),
     );
   }
 }
+
 
 class _StatCard extends StatefulWidget {
   final String label;
@@ -226,7 +216,8 @@ class _StatCardState extends State<_StatCard>
     return text.split('\n').expand((line) {
       if (line.startsWith("Total:")) {
         return [
-          const TextSpan(text: "Total: ", style: TextStyle(color: Colors.white)),
+          TextSpan(text: "Total: ", style: TextStyle(color: Theme.of(context).colorScheme.onSurface,
+)),
           TextSpan(
             text: line.replaceFirst("Total: ", "") + "\n",
             style: TextStyle(color: green),
@@ -236,7 +227,8 @@ class _StatCardState extends State<_StatCard>
 
       if (line.startsWith("Avg:")) {
         return [
-          const TextSpan(text: "Avg: ", style: TextStyle(color: Colors.white)),
+          TextSpan(text: "Avg: ", style: TextStyle(color: Theme.of(context).colorScheme.onSurface,
+)),
           TextSpan(
             text: line.replaceFirst("Avg: ", ""),
             style: TextStyle(color: green),
@@ -286,7 +278,6 @@ class _StatCardState extends State<_StatCard>
           );
         },
         child: Card(
-          color: const Color(0xFF121212),
           elevation: 2,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
@@ -302,7 +293,7 @@ class _StatCardState extends State<_StatCard>
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                 ),
 
@@ -318,7 +309,7 @@ class _StatCardState extends State<_StatCard>
                                 ?.copyWith(
                                   fontSize: 26,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                                  color: Theme.of(context).colorScheme.onSurface,
                                 )
                             : Theme.of(context)
                                 .textTheme
@@ -326,7 +317,7 @@ class _StatCardState extends State<_StatCard>
                                 ?.copyWith(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w600,
-                                  color: Colors.white,
+                                  color: Theme.of(context).colorScheme.onSurface,
                                 )),
                     children: _buildValueSpans(widget.value),
                   ),
