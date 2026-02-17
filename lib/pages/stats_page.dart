@@ -49,7 +49,7 @@ class StatsPage extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Color(0xFF1A1A1A),
+            Color(0xFF000000),
             Color(0xFF000000),
           ],
         ),
@@ -178,7 +178,7 @@ class _StatCardState extends State<_StatCard>
     // Border animation
     _borderController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 400),
+      duration: const Duration(milliseconds: 500),
     );
 
     // Pulse animation
