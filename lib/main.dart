@@ -60,7 +60,10 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
         colorSchemeSeed: const Color.fromARGB(255, 0, 150, 52),
         brightness: Brightness.light,
-        scaffoldBackgroundColor: Colors.white, // 👈 REQUIRED
+        scaffoldBackgroundColor: Colors.white,
+        cardTheme: CardThemeData(
+          color: Color.fromARGB(255, 236, 236, 236)
+        ) // 👈 REQUIRED
       ),
 
       // 🌙 DARK THEME
@@ -88,6 +91,9 @@ class _MyAppState extends State<MyApp> {
           }),
         ),
 
+        cardTheme: CardThemeData(
+          color: Color.fromARGB(255, 30, 30, 30)
+        ),
         appBarTheme: const AppBarTheme(
           backgroundColor: Color.fromARGB(255, 20, 20, 20),
         ),
