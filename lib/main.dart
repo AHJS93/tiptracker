@@ -66,7 +66,7 @@ class _MyAppState extends State<MyApp> {
           brightness: Brightness.dark,
         ),
         navigationBarTheme: NavigationBarThemeData(
-          backgroundColor: const Color(0xFF111111),
+          backgroundColor: const Color.fromARGB(255, 20, 20, 20),
           indicatorColor: Color.fromARGB(255, 35, 176, 28),
           iconTheme: WidgetStateProperty.resolveWith((states) {
             if (states.contains(WidgetState.selected)) {
@@ -81,6 +81,10 @@ class _MyAppState extends State<MyApp> {
             return const TextStyle(color: Colors.grey);
           }),
         ),
+        appBarTheme: AppBarThemeData(
+          backgroundColor: Color.fromARGB(255, 20, 20, 20)
+        ),
+        scaffoldBackgroundColor: Color.fromARGB(255, 15, 15, 15)
       ),
 
       home: Scaffold(
