@@ -91,7 +91,6 @@ class StatsPage extends StatelessWidget {
                 value:
                     "Total: \$${weeklyCash.toStringAsFixed(2)}\nAvg: \$${weeklyAvg.toStringAsFixed(2)}",
                 isLarge: false,
-                showArrow: true,
                 onTap: () {
                   Navigator.push(
                     context,
@@ -108,7 +107,6 @@ class StatsPage extends StatelessWidget {
                 value:
                     "Total: \$${monthlyCash.toStringAsFixed(2)}\nAvg: \$${monthlyAvg.toStringAsFixed(2)}",
                 isLarge: false,
-                showArrow: true,
                 onTap: () {
                   Navigator.push(
                     context,
@@ -134,14 +132,12 @@ class _StatCard extends StatelessWidget {
   final String label;
   final String value;
   final bool isLarge;
-  final bool showArrow;
   final VoidCallback? onTap; // 👈 NEW
 
   const _StatCard({
     required this.label,
     required this.value,
     this.isLarge = true,
-    this.showArrow = false,
     this.onTap, // 👈 NEW
   });
 
@@ -202,16 +198,6 @@ class _StatCard extends StatelessWidget {
                               ))
                         ?.copyWith(color: _getValueColor()),
               ),
-
-              if (showArrow)
-                const Padding(
-                  padding: EdgeInsets.only(top: 6),
-                  child: Icon(
-                    Icons.chevron_right,
-                    size: 22,
-                    color: Colors.grey,
-                  ),
-                ),
             ],
           ),
         ),
