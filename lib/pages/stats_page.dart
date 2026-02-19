@@ -219,7 +219,7 @@ class _StatCardState extends State<_StatCard>
           TextSpan(text: "Total: ", style: TextStyle(color: Theme.of(context).colorScheme.onSurface,
 )),
           TextSpan(
-            text: line.replaceFirst("Total: ", "") + "\n",
+            text: "${line.replaceFirst("Total: ", "")}\n",
             style: TextStyle(color: green),
           ),
         ];
@@ -238,7 +238,7 @@ class _StatCardState extends State<_StatCard>
 
       return [
         TextSpan(
-          text: line + "\n",
+          text: "$line\n",
           style: TextStyle(color: _getValueColor()),
         )
       ];
